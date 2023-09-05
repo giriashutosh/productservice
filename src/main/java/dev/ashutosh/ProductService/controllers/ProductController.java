@@ -5,6 +5,7 @@ import dev.ashutosh.ProductService.services.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -17,8 +18,8 @@ public class ProductController {
         this.productService = productService;
     }
     @GetMapping
-    public void getAllProducts(){
-
+    public List<GenericProductDto> getAllProducts(){
+       return  productService.getAllProducts();
     }
 
     @GetMapping("{id}")
@@ -27,12 +28,14 @@ public class ProductController {
     }
 
     @DeleteMapping("{id}")
-    public void deleteProductById(){
-
+    public GenericProductDto deleteProductById(@PathVariable("id") Long id){
+        System.out.println("product deleted successfully");
+       return productService.deleteProductById(id);
     }
     @PostMapping
-    public String createProduct(){
-        return "created a product with id: " + UUID.randomUUID();
+    public GenericProductDto createProduct(@RequestBody GenericProductDto product){
+        System.out.println(product);
+        return productService.createProduct(product);
     }
 
     @PutMapping("{id}")

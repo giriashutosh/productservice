@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service("fakeStoreProductService")
 public class FakeStoreProductService implements ProductService{
 
@@ -20,7 +23,18 @@ public class FakeStoreProductService implements ProductService{
     }
     @Override
     public GenericProductDto createProduct(GenericProductDto product) {
-        return null;
+        RestTemplate restTemplate = restTemplateBuilder.build();
+        ResponseEntity<FakeStoreProductDto> response = restTemplate.postForEntity(createProductRequest, product, FakeStoreProductDto.class);
+        FakeStoreProductDto fakeStoreProductDto = response.getBody();
+        GenericProductDto productDto = new GenericProductDto();
+        productDto.setId(fakeStoreProductDto.getId());
+        productDto.setCategory(fakeStoreProductDto.getCategory());
+        productDto.setPrice(fakeStoreProductDto.getPrice());
+        productDto.setTitle(fakeStoreProductDto.getTitle());
+        productDto.setImage(fakeStoreProductDto.getImage());
+        productDto.setDescription(fakeStoreProductDto.getDescription());
+
+        return productDto;
     }
 
     @Override
@@ -37,5 +51,31 @@ public class FakeStoreProductService implements ProductService{
         product.setDescription(fakeStoreProductDto.getDescription());
 
         return product;
+    }
+
+    @Override
+    public List<GenericProductDto> getAllProducts() {
+        RestTemplate restTemplate = restTemplateBuilder.build();
+        ResponseEntity<FakeStoreProductDto[]> response= restTemplate.getForEntity(createProductRequest, FakeStoreProductDto[].class);
+        FakeStoreProductDto[] fakeStoreProductDtos = response.getBody();
+        List<GenericProductDto> products = new ArrayList<>();
+        for(FakeStoreProductDto fakeStoreProductDto: fakeStoreProductDtos){
+            GenericProductDto product = new GenericProductDto();
+            product.setId(fakeStoreProductDto.getId());
+            product.setCategory(fakeStoreProductDto.getCategory());
+            product.setPrice(fakeStoreProductDto.getPrice());
+            product.setTitle(fakeStoreProductDto.getTitle());
+            product.setImage(fakeStoreProductDto.getImage());
+            product.setDescription(fakeStoreProductDto.getDescription());
+            products.add(product);
+        }
+        return products;
+    }
+
+    @Override
+    public GenericProductDto deleteProductById(Long id) {
+        RestTemplate restTemplate = restTemplateBuilder.build();
+        restTemplate.delete(getProductByIdRequest, id);
+        return new GenericProductDto();
     }
 }
