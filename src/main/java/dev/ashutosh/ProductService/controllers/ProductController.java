@@ -1,8 +1,10 @@
 package dev.ashutosh.ProductService.controllers;
 
 import dev.ashutosh.ProductService.dtos.GenericProductDto;
+import dev.ashutosh.ProductService.exceptions.NotFoundException;
 import dev.ashutosh.ProductService.services.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +25,7 @@ public class ProductController {
     }
 
     @GetMapping("{id}")
-    public GenericProductDto getProductById(@PathVariable("id") Long id){
+    public GenericProductDto getProductById(@PathVariable("id") Long id) throws NotFoundException {
         return productService.getProductById(id);
     }
 
@@ -39,7 +41,10 @@ public class ProductController {
     }
 
     @PutMapping("{id}")
-    public void updateProductById(){
-
+    public GenericProductDto updateProductById(@PathVariable("id") Long id, @RequestBody GenericProductDto product){
+        System.out.println("product updated successfully");
+        return productService.updateProductById(id, product);
     }
+
+
 }
