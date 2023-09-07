@@ -79,7 +79,8 @@ public class FakeStoreProductService implements ProductService{
                 getProductByIdRequest,
                 HttpMethod.DELETE,
                 null,  // Request entity (none needed for DELETE)
-                FakeStoreProductDto.class  // Expected response type
+                FakeStoreProductDto.class,  // Expected response type
+                id
         );
         return convertFakeStoreProductDtoToGenericProductDto(response.getBody());
     }
@@ -95,10 +96,11 @@ public class FakeStoreProductService implements ProductService{
 
 
         ResponseEntity<GenericProductDto> responseEntity = restTemplate.exchange(
-                updateProductByIdRequest,
+                getProductByIdRequest,
                 HttpMethod.PUT,
                 requestEntity,
-                GenericProductDto.class
+                GenericProductDto.class,
+                id
         );
         return responseEntity.getBody();
     }
