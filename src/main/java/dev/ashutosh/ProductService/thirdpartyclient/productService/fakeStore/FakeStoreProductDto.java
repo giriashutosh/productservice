@@ -1,4 +1,4 @@
-package dev.ashutosh.ProductService.dtos;
+package dev.ashutosh.ProductService.thirdpartyclient.productService.fakeStore;
 
 import lombok.Getter;
 import lombok.Setter;
