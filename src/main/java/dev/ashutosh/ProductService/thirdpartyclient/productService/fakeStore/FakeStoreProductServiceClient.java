@@ -25,8 +25,6 @@ public class FakeStoreProductServiceClient {
         RestTemplate restTemplate = restTemplateBuilder.build();
         ResponseEntity<FakeStoreProductDto> response = restTemplate.postForEntity(createProductRequest, product, FakeStoreProductDto.class);
         FakeStoreProductDto fakeStoreProductDto = response.getBody();
-
-
         return fakeStoreProductDto;
     }
 
