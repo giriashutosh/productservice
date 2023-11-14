@@ -1,6 +1,6 @@
 package dev.ashutosh.ProductService.models;
 
-public class Product {
+public class Product extends BaseModel{
     private String title;
     private double price;
     private String description;
