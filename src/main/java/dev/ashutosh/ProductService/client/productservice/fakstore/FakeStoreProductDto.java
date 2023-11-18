@@ -1,4 +1,4 @@
-package dev.ashutosh.ProductService.thirdpartyclient.productService.fakeStore;
+package dev.ashutosh.ProductService.client.productservice.fakstore;
 
 import lombok.Getter;
 import lombok.Setter;

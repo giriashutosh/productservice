@@ -1,13 +1,10 @@
 package dev.ashutosh.ProductService.services;
 
-import dev.ashutosh.ProductService.thirdpartyclient.productService.fakeStore.FakeStoreProductDto;
+import dev.ashutosh.ProductService.client.productservice.fakstore.FakeStoreProductDto;
 import dev.ashutosh.ProductService.dtos.GenericProductDto;
 import dev.ashutosh.ProductService.exceptions.NotFoundException;
-import dev.ashutosh.ProductService.thirdpartyclient.productService.fakeStore.FakeStoreProductServiceClient;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.*;
+import dev.ashutosh.ProductService.client.productservice.fakstore.FakeStoreProductServiceClient;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
