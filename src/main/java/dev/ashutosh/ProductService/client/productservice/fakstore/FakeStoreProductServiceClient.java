@@ -1,4 +1,4 @@
-package dev.ashutosh.ProductService.thirdpartyclient.productService.fakeStore;
+package dev.ashutosh.ProductService.client.productservice.fakstore;
 
 import dev.ashutosh.ProductService.dtos.GenericProductDto;
 import dev.ashutosh.ProductService.exceptions.NotFoundException;
@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class FakeStoreProductServiceClient {
+public class FakeStoreProductServiceClient  {
     private RestTemplateBuilder restTemplateBuilder;
     private String getProductByIdRequest = "https://fakestoreapi.com/products/{id}";
     private String createProductRequest = "https://fakestoreapi.com/products";
@@ -38,9 +38,6 @@ public class FakeStoreProductServiceClient {
         if(fakeStoreProductDto == null){
             throw new NotFoundException("Product with id: " + id + " not found");
         }
-
-
-
         return fakeStoreProductDto;
     }
 
@@ -50,10 +47,6 @@ public class FakeStoreProductServiceClient {
         ResponseEntity<FakeStoreProductDto[]> response= restTemplate.getForEntity(createProductRequest, FakeStoreProductDto[].class);
         //FakeStoreProductDto[] fakeStoreProductDtos = response.getBody();
         List<GenericProductDto> products = new ArrayList<>();
-//        for(FakeStoreProductDto fakeStoreProductDto: fakeStoreProductDtos){
-//
-//            products.add(convertFakeStoreProductDtoToGenericProductDto(fakeStoreProductDto));
-//        }
         return Arrays.stream(response.getBody()).toList();
     }
 
