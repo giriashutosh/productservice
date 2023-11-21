@@ -2,6 +2,7 @@ package dev.ashutosh.ProductService.client.productservice.fakstore;
 
 import dev.ashutosh.ProductService.dtos.GenericProductDto;
 import dev.ashutosh.ProductService.exceptions.NotFoundException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -13,11 +14,19 @@ import java.util.List;
 @Service
 public class FakeStoreProductServiceClient  {
     private RestTemplateBuilder restTemplateBuilder;
-    private String getProductByIdRequest = "https://fakestoreapi.com/products/{id}";
-    private String createProductRequest = "https://fakestoreapi.com/products";
 
+//    @Value("${fakestore.api.url}")
+//    private String fakestoreApiUrl;
+//
+//    @Value("${fakestore.api.product.path.url}")
+//    private String fakestoreProductPathUrl;
 
-    public FakeStoreProductServiceClient(RestTemplateBuilder restTemplateBuilder){
+    private String createProductRequest;
+    private String getProductByIdRequest;
+    public FakeStoreProductServiceClient(RestTemplateBuilder restTemplateBuilder, @Value("${fakeStore.api.url}") String fakestoreApiUrl,
+                @Value("${fakeStore.api.paths.products}") String fakestoreProductPathUrl) {
+        this.createProductRequest = fakestoreApiUrl + fakestoreProductPathUrl;
+        this.getProductByIdRequest = fakestoreApiUrl + fakestoreProductPathUrl + "/{id}";
         this.restTemplateBuilder = restTemplateBuilder;
     }
 
