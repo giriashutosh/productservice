@@ -8,6 +8,7 @@ import dev.ashutosh.ProductService.models.Product;
 import dev.ashutosh.ProductService.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -55,7 +56,19 @@ public class SelfProductService implements ProductService {
 
     @Override
     public List<GenericProductDto> getAllProducts() {
-        return null;
+        List<Product> allProducts = productRepository.findAll();
+        List <GenericProductDto> genericProductDtos = new ArrayList<>();
+        for (Product product: allProducts)
+        {
+            GenericProductDto productDto = new GenericProductDto();
+            productDto.setTitle(product.getTitle());
+            productDto.setCategory(product.getCategory().getName());
+            productDto.setDescription(product.getDescription());
+            productDto.setImage(product.getImage());
+            productDto.setPrice(product.getPrice().getPrice());
+            genericProductDtos.add(productDto);
+        }
+        return genericProductDtos;
     }
 
     @Override
