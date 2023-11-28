@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service("fakeStoreProductService")
 public class FakeStoreProductService implements ProductService{
@@ -20,9 +21,9 @@ public class FakeStoreProductService implements ProductService{
 
     private GenericProductDto convertFakeStoreProductDtoToGenericProductDto(FakeStoreProductDto fakeStoreProductDto){
         GenericProductDto productDto = new GenericProductDto();
-        productDto.setId(fakeStoreProductDto.getId());
-        productDto.setCategory(fakeStoreProductDto.getCategory());
-        productDto.setPrice(fakeStoreProductDto.getPrice());
+        //productDto.setId(fakeStoreProductDto.getId());
+        //productDto.setCategory(fakeStoreProductDto.getCategory());
+        //productDto.setPrice(fakeStoreProductDto.getPrice());
         productDto.setTitle(fakeStoreProductDto.getTitle());
         productDto.setImage(fakeStoreProductDto.getImage());
         productDto.setDescription(fakeStoreProductDto.getDescription());
@@ -35,7 +36,7 @@ public class FakeStoreProductService implements ProductService{
     }
 
     @Override
-    public GenericProductDto getProductById(Long id) throws NotFoundException {
+    public GenericProductDto getProductById(UUID id) throws NotFoundException {
 
         return convertFakeStoreProductDtoToGenericProductDto(fakeStoreProductServiceClient.getProductById(id));
     }
@@ -61,5 +62,15 @@ public class FakeStoreProductService implements ProductService{
     public GenericProductDto updateProductById(Long id, GenericProductDto product) {
         System.out.println("Updated successfully");
         return convertFakeStoreProductDtoToGenericProductDto(fakeStoreProductServiceClient.updateProductById(id, product));
+    }
+
+    @Override
+    public GenericProductDto getAllCategories() {
+        return null;
+    }
+
+    @Override
+    public GenericProductDto getSpecificCategory(String category) {
+        return null;
     }
 }

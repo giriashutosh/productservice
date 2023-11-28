@@ -16,7 +16,7 @@ public class ProductController {
 
     private ProductService productService;
 
-    public ProductController(@Qualifier("fakeStoreProductService") ProductService productService){
+    public ProductController(@Qualifier("selfProductService") ProductService productService){
         this.productService = productService;
     }
     @GetMapping
@@ -25,7 +25,7 @@ public class ProductController {
     }
 
     @GetMapping("{id}")
-    public GenericProductDto getProductById(@PathVariable("id") Long id) throws NotFoundException {
+    public GenericProductDto getProductById(@PathVariable("id") UUID id) throws NotFoundException {
         return productService.getProductById(id);
     }
 
@@ -46,5 +46,13 @@ public class ProductController {
         return productService.updateProductById(id, product);
     }
 
+    @GetMapping("/categories")
+    public GenericProductDto getAllCategories(){
+        return productService.getAllCategories();
+    }
 
+    @GetMapping("/categories/{category}")
+    public GenericProductDto getSpecificCategory(@PathVariable("category") String category){
+        return productService.getSpecificCategory(category);
+    }
 }

@@ -10,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class FakeStoreProductServiceClient  {
@@ -38,7 +39,7 @@ public class FakeStoreProductServiceClient  {
     }
 
 
-    public FakeStoreProductDto getProductById(Long id) throws NotFoundException {
+    public FakeStoreProductDto getProductById(UUID id) throws NotFoundException {
         RestTemplate restTemplate = restTemplateBuilder.build();
         ResponseEntity<FakeStoreProductDto> response = restTemplate.getForEntity(getProductByIdRequest, FakeStoreProductDto.class, id);
         System.out.println(response.getBody());

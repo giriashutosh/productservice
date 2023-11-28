@@ -1,5 +1,7 @@
 package dev.ashutosh.ProductService.client.productservice.fakstore;
 
+import dev.ashutosh.ProductService.models.Category;
+import dev.ashutosh.ProductService.models.Price;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +12,6 @@ public class FakeStoreProductDto {
     private String title;
     private String description;
     private String image;
-    private String category;
-    private double price;
+    private Category category;
+    private Price price;
 }

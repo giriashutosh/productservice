@@ -11,7 +11,6 @@ import static jakarta.persistence.CascadeType.REMOVE;
 @Entity
 public class Product extends BaseModel{
     private String title;
-
     private String description;
     private String image;
     @ManyToOne(cascade = {CascadeType.PERSIST})
