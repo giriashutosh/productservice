@@ -61,7 +61,7 @@ public class FakeStoreProductServiceClient  {
     }
 
 
-    public FakeStoreProductDto deleteProductById(Long id) {
+    public FakeStoreProductDto deleteProductById(UUID id) {
         RestTemplate restTemplate = restTemplateBuilder.build();
         //restTemplate.delete(getProductByIdRequest, id);
         ResponseEntity<FakeStoreProductDto> response = restTemplate.exchange(

@@ -1,5 +1,6 @@
 package dev.ashutosh.ProductService.controllers;
 
+import dev.ashutosh.ProductService.dtos.CategoryDto;
 import dev.ashutosh.ProductService.dtos.GenericProductDto;
 import dev.ashutosh.ProductService.exceptions.NotFoundException;
 import dev.ashutosh.ProductService.services.ProductService;
@@ -30,8 +31,8 @@ public class ProductController {
     }
 
     @DeleteMapping("{id}")
-    public GenericProductDto deleteProductById(@PathVariable("id") Long id){
-        System.out.println("product deleted successfully");
+    public String deleteProductById(@PathVariable("id") UUID id){
+
        return productService.deleteProductById(id);
     }
     @PostMapping
@@ -41,18 +42,23 @@ public class ProductController {
     }
 
     @PutMapping("{id}")
-    public GenericProductDto updateProductById(@PathVariable("id") Long id, @RequestBody GenericProductDto product){
-        System.out.println("product updated successfully");
-        return productService.updateProductById(id, product);
+    public GenericProductDto updateProductById(@PathVariable("id") UUID id, @RequestBody GenericProductDto product) {
+        GenericProductDto updatedProduct = new GenericProductDto();
+        try{
+            updatedProduct = productService.updateProductById(id, product);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return updatedProduct;
     }
 
     @GetMapping("/categories")
-    public GenericProductDto getAllCategories(){
+    public List<CategoryDto> getAllCategories(){
         return productService.getAllCategories();
     }
 
     @GetMapping("/categories/{category}")
-    public GenericProductDto getSpecificCategory(@PathVariable("category") String category){
-        return productService.getSpecificCategory(category);
+    public List<GenericProductDto> getInCategory(@PathVariable("category") String category){
+        return productService.getInCategory(category);
     }
 }
